@@ -1,0 +1,286 @@
+[
+  {
+    "id": "AWR-01",
+    "title": "Phishing Awareness & Email Defense",
+    "category": "PHISHING",
+    "summary": "Learn how to spot deceptive emails, malicious attachments, domain spoofing, and urgent credential harvesting requests.",
+    "what_is_it": "Phishing is a social engineering technique where attackers impersonate trustworthy entities (banks, IT support, executives) to trick individuals into disclosing passwords, downloading malware, or authorizing unauthorized wire transfers.",
+    "why_it_matters": "Over 80% of reported security incidents begin with a phishing lure. A single compromised credential can lead to enterprise-wide ransomware or data breach.",
+    "warning_signs": [
+      "Urgent or threatening language (e.g., 'Account suspended within 2 hours')",
+      "Mismatched sender display names and actual email headers/domains",
+      "Generic greetings like 'Dear Customer' when personal context is expected",
+      "Unexpected invoices, shipping notifications, or password reset confirmations",
+      "Embedded links pointing to unfamiliar or look-alike domains"
+    ],
+    "safe_practices": [
+      "Hover over links to inspect the destination URL before clicking",
+      "Verify unexpected requests directly through a known, trusted out-of-band channel",
+      "Never enter corporate credentials on external or unfamiliar websites",
+      "Use email client phishing reporting buttons immediately upon discovery"
+    ],
+    "what_to_do": "If you clicked a suspicious link or provided credentials, immediately disconnect from network, change your password from an isolated trusted device, and alert your SOC/IT Security team."
+  },
+  {
+    "id": "AWR-02",
+    "title": "Password Security & Passphrase Hygiene",
+    "category": "PASSWORDS",
+    "summary": "Master strong password generation, password manager usage, and avoidance of credential reuse across accounts.",
+    "what_is_it": "Password hygiene involves creating complex, unique passwords or multi-word passphrases for every single service to prevent credential stuffing and brute-force attacks.",
+    "why_it_matters": "Attackers leverage massive leaked credential databases. If you reuse the same password on multiple sites, a breach at one vendor immediately exposes your enterprise and personal accounts.",
+    "warning_signs": [
+      "Prompts to reuse familiar passwords across personal and work services",
+      "Using easily guessable personal info (birthdays, pet names, company name)",
+      "Storing passwords in unencrypted text files, spreadsheets, or sticky notes"
+    ],
+    "safe_practices": [
+      "Use passphrases consisting of 4+ random words (e.g., 'correct-horse-battery-staple')",
+      "Utilize an approved enterprise password manager to generate and store random 16+ character passwords",
+      "Never share passwords over email, chat, or voice communications"
+    ],
+    "what_to_do": "If you suspect a password has been compromised or leaked, reset it immediately and enable multi-factor authentication across all associated services."
+  },
+  {
+    "id": "AWR-03",
+    "title": "Multi-Factor Authentication (MFA) & Phishing Resistance",
+    "category": "MFA",
+    "summary": "Understand MFA mechanisms, authenticator apps, hardware security keys (FIDO2/WebAuthn), and MFA prompt fatigue attacks.",
+    "what_is_it": "Multi-Factor Authentication requires two or more distinct verification factors (something you know, something you have, something you are) before granting access.",
+    "why_it_matters": "MFA blocks over 99% of automated credential stuffing attacks. However, modern adversaries use push-fatigue or adversary-in-the-middle phishing to bypass basic SMS/push methods.",
+    "warning_signs": [
+      "Receiving unsolicited MFA push notifications when you are not actively logging in",
+      "Phone calls from individuals claiming to be 'IT Support' asking you to read a one-time passcode"
+    ],
+    "safe_practices": [
+      "Prefer authenticator apps (TOTP) or hardware security keys (FIDO2/Passkeys) over SMS",
+      "Always reject unrequested MFA push notifications and report them immediately",
+      "Use number matching on push notifications to ensure prompt origin alignment"
+    ],
+    "what_to_do": "If you receive repetitive unexpected MFA prompts, click 'Deny', report the incident to your SOC as a suspected MFA fatigue attack, and change your primary password."
+  },
+  {
+    "id": "AWR-04",
+    "title": "Social Engineering & Vishing/Smishing Defense",
+    "category": "SOCIAL ENGINEERING",
+    "summary": "Recognize psychological manipulation techniques including phone pretexting (vishing), SMS scams (smishing), and impersonation.",
+    "what_is_it": "Social engineering exploits human psychology (trust, fear, urgency, curiosity, or helpfulness) rather than technical software bugs to manipulate people into breaking security procedures.",
+    "why_it_matters": "Adversaries research public LinkedIn profiles, organizational charts, and vendor relationships to craft highly credible impersonation scenarios.",
+    "warning_signs": [
+      "Callers claiming to be executive leadership demanding emergency exceptions to financial or data release protocols",
+      "SMS text messages demanding urgent parcel fee payment or urgent payroll updates",
+      "Pressure to bypass standard security verifications or authorization flows"
+    ],
+    "safe_practices": [
+      "Always verify caller identities via corporate directory call-backs before sharing sensitive data",
+      "Follow dual-custody authorization policies for all wire transfers and access grants",
+      "Maintain a healthy culture of verification: asking for confirmation is good security, not rudeness"
+    ],
+    "what_to_do": "Hang up or cease communication, document the caller's claimed identity and request details, and inform your security team."
+  },
+  {
+    "id": "AWR-05",
+    "title": "Safe Web Browsing & Malicious Downloads",
+    "category": "SAFE BROWSING",
+    "summary": "Navigate the web securely, detect typosquatting domains, avoid drive-by downloads, and manage browser extensions.",
+    "what_is_it": "Safe browsing encompasses habits and browser settings that minimize exposure to web exploits, malicious redirects, compromised advertising networks, and fake download portals.",
+    "why_it_matters": "Compromised benign websites and malvertising campaigns can silently redirect users to exploit kits or trick them into installing backdoor-laden software packages.",
+    "warning_signs": [
+      "Browser warnings indicating expired or invalid TLS/SSL certificates",
+      "Unexpected prompts to download executable files (.exe, .scr, .iso, .vbs) when visiting general web pages",
+      "Aggressive popups claiming your computer is infected with viruses with a phone number to call"
+    ],
+    "safe_practices": [
+      "Only download software from official vendor repositories and approved corporate catalogs",
+      "Audit browser extensions periodically and remove unneeded or suspicious add-ons",
+      "Ensure HTTPS encryption is active on all web sites where information is submitted"
+    ],
+    "what_to_do": "If a webpage triggers an unexpected file download, do NOT open the file. Delete it from your downloads directory and notify IT security."
+  },
+  {
+    "id": "AWR-06",
+    "title": "Secure Wi-Fi & Public Network Protection",
+    "category": "SECURE WI-FI",
+    "summary": "Safeguard communications on hotel, airport, and coffee shop networks using enterprise VPNs and encrypted protocols.",
+    "what_is_it": "Public Wi-Fi networks are often unencrypted or shared with unknown users, enabling attackers to perform eavesdropping, evil twin attacks, and man-in-the-middle credential interception.",
+    "why_it_matters": "Connecting to rogue access points allows adversaries to inspect unencrypted traffic, inject malicious code into cleartext streams, or spoof DNS resolutions.",
+    "warning_signs": [
+      "Wi-Fi networks with generic names matching public locations but lacking password authentication",
+      "Certificate warning banners popping up on reputable websites after connecting to public Wi-Fi",
+      "Automated connection to open networks without explicit user approval"
+    ],
+    "safe_practices": [
+      "Always connect through an enterprise VPN before accessing internal applications on public networks",
+      "Disable 'Auto-Connect to Open Wi-Fi' on laptops and mobile devices",
+      "Use cellular hotspot tethering as a secure alternative to untrusted public networks"
+    ],
+    "what_to_do": "Immediately disconnect from suspicious public networks, verify VPN tunnel status, and inspect your active browser sessions for certificate warnings."
+  },
+  {
+    "id": "AWR-07",
+    "title": "Software Patching & Vulnerability Hygiene",
+    "category": "SOFTWARE UPDATES",
+    "summary": "Understand the critical role of timely operating system, browser, and third-party software updates in closing known security holes.",
+    "what_is_it": "Software patching is the systematic deployment of vendor-released security fixes to remediate vulnerabilities (CVEs) before threat actors can exploit them.",
+    "why_it_matters": "The majority of successful ransomware and cyber intrusions exploit known vulnerabilities for which patches were available months prior.",
+    "warning_signs": [
+      "Postponing reboot or update prompts repeatedly for weeks",
+      "Running deprecated software versions that have reached End-of-Life (EOL)"
+    ],
+    "safe_practices": [
+      "Enable automatic updates for operating systems, web browsers, and productivity tools",
+      "Restart devices promptly when update notifications require a reboot",
+      "Report legacy, unpatchable systems to IT for compensating network isolation"
+    ],
+    "what_to_do": "Check your system update settings weekly to ensure all critical security patches are installed and verified."
+  },
+  {
+    "id": "AWR-08",
+    "title": "Ransomware Awareness & Defensive Measures",
+    "category": "RANSOMWARE",
+    "summary": "Understand how ransomware propagates, the importance of offline backups, and early detection indicators.",
+    "what_is_it": "Ransomware is malicious software designed to deny access to computer systems or data through encryption, often coupled with data exfiltration extortion.",
+    "why_it_matters": "Ransomware attacks can paralyze entire hospitals, municipal services, universities, and enterprise supply chains, causing millions in losses and operational downtime.",
+    "warning_signs": [
+      "Sudden disk activity accompanied by files changing extensions to unknown formats",
+      "Text or HTML ransom notes appearing on desktops or network file shares",
+      "Endpoint protection alerts flagging unauthorized volume shadow copy deletion"
+    ],
+    "safe_practices": [
+      "Maintain immutable, disconnected (3-2-1 rule) backups of all critical data",
+      "Apply strict least privilege access controls to network shares and folders",
+      "Never enable macros on untrusted Office documents received via email"
+    ],
+    "what_to_do": "Immediately isolate the infected device from Wi-Fi and wired Ethernet to stop lateral propagation, do NOT reboot (to preserve RAM forensics), and notify incident response."
+  },
+  {
+    "id": "AWR-09",
+    "title": "Removable Media & USB Security",
+    "category": "REMOVABLE MEDIA",
+    "summary": "Mitigate risks associated with rogue USB drives, BadUSB firmware payloads, and data exfiltration through external drives.",
+    "what_is_it": "Removable media safety involves secure handling of USB flash drives, external hard drives, and SD cards to prevent automated payload execution and data leakage.",
+    "why_it_matters": "Attackers deliberately drop malicious USB drives in parking lots or lobbies ('USB baiting') programmed as HID keyboard emulators that inject commands within seconds.",
+    "warning_signs": [
+      "Finding unattended USB drives labeled with enticing titles (e.g., 'Executive Payroll 2026', 'Confidential Bonuses')",
+      "Unexpected keyboard or terminal keystroke bursts upon inserting a USB device"
+    ],
+    "safe_practices": [
+      "Never insert found, unverified, or gift promotional USB drives into corporate systems",
+      "Use hardware write-blocking or IT-managed encrypted storage for authorized transfers",
+      "Turn off AutoRun and AutoPlay capabilities across all operating systems"
+    ],
+    "what_to_do": "Hand in any found USB drives directly to the security operations center or IT help desk without plugging them in."
+  },
+  {
+    "id": "AWR-10",
+    "title": "Data Privacy & Information Classification",
+    "category": "DATA EXPOSURE",
+    "summary": "Handle sensitive data (PII, PHI, financial records, IP) appropriately according to data classification standards.",
+    "what_is_it": "Data privacy practices ensure confidential and personal information is stored, processed, shared, and disposed of in compliance with regulatory and organizational policies.",
+    "why_it_matters": "Data breaches result in substantial regulatory penalties (GDPR, HIPAA, CCPA), reputational damage, and loss of customer trust.",
+    "warning_signs": [
+      "Storing customer PII or credit card numbers in publicly accessible cloud buckets",
+      "Sending unencrypted confidential spreadsheets over standard external email",
+      "Disposing of paper documents containing personal data without shredding"
+    ],
+    "safe_practices": [
+      "Classify files (Public, Internal, Confidential, Restricted) and apply appropriate encryption",
+      "Utilize enterprise data loss prevention (DLP) tools and secure file transfer mechanisms",
+      "Regularly review shared folder permissions and revoke external access when no longer required"
+    ],
+    "what_to_do": "If you inadvertently share confidential data with an unauthorized party, alert your privacy officer and security team immediately for containment."
+  },
+  {
+    "id": "AWR-11",
+    "title": "Mobile Device Security & App Permissions",
+    "category": "MOBILE SECURITY",
+    "summary": "Protect smartphones and tablets against mobile malware, excessive app permissions, and unauthorized device access.",
+    "what_is_it": "Mobile security includes securing mobile operating systems, isolating corporate data (MDM/MAM), and monitoring application permissions.",
+    "why_it_matters": "Smartphones hold corporate emails, 2FA authenticator apps, sensitive messages, and location history, making them prime targets for threat actors.",
+    "warning_signs": [
+      "Apps requesting unnecessary permissions (e.g., flashlight app requesting contacts and SMS access)",
+      "Unusual battery drain, excessive data usage, or device overheating when idle",
+      "Prompts to install configuration profiles or certificates from untrusted web pages"
+    ],
+    "safe_practices": [
+      "Enforce strong device passcodes, biometric locks, and automatic screen timeouts",
+      "Only install apps from official app stores (Google Play, Apple App Store)",
+      "Keep mobile OS and apps updated to latest supported releases"
+    ],
+    "what_to_do": "If a mobile device is lost, stolen, or compromised, initiate remote wipe procedures via your company MDM portal or mobile vendor cloud portal."
+  },
+  {
+    "id": "AWR-12",
+    "title": "Remote Work & Home Network Defense",
+    "category": "REMOTE WORK",
+    "summary": "Implement defensive measures for hybrid work environments, home router security, and physical workstation privacy.",
+    "what_is_it": "Remote work security establishes enterprise-grade safeguards for home offices and traveling employees outside traditional perimeter firewalls.",
+    "why_it_matters": "Home routers with default credentials and unpatched IoT devices on home networks can serve as stepping stones to breach work laptops.",
+    "warning_signs": [
+      "Default admin passwords unchanged on home Wi-Fi routers",
+      "Family members or guests using corporate workstations for browsing or gaming",
+      "Working in public spaces where screens are visible to bystanders (shoulder surfing)"
+    ],
+    "safe_practices": [
+      "Change default router credentials and enable WPA3/WPA2-AES encryption with strong keys",
+      "Keep work devices dedicated solely to corporate business tasks",
+      "Use privacy screen filters when working in transit or coffee shops"
+    ],
+    "what_to_do": "Segment home IoT devices into an isolated guest network so corporate laptops remain separated from smart TVs and IoT appliances."
+  },
+  {
+    "id": "AWR-13",
+    "title": "Cloud Account Security & API Token Hygiene",
+    "category": "ACCOUNT SECURITY",
+    "summary": "Secure cloud environments (AWS, Azure, GCP, SaaS) through least privilege, token rotation, and activity monitoring.",
+    "what_is_it": "Cloud account security encompasses identity management, IAM role scoping, session management, and protecting API keys and credentials.",
+    "why_it_matters": "Leaked API keys committed to public GitHub repositories or over-privileged IAM roles can give attackers complete control over cloud infrastructure in seconds.",
+    "warning_signs": [
+      "Hardcoding API keys or secret tokens directly inside source code or git commits",
+      "Root / Global Admin accounts used for day-to-day administrative operations",
+      "Cloud audit logs disabled or unmonitored for anomalous geographic logins"
+    ],
+    "safe_practices": [
+      "Never commit secrets to source code; use environment variables and Secret Managers",
+      "Apply the Principle of Least Privilege: grant only the exact permissions needed",
+      "Rotate API keys and service tokens regularly and enforce short-lived session tokens"
+    ],
+    "what_to_do": "If an API key or cloud credential is leaked, immediately revoke it, audit cloud CloudTrail/audit logs for unauthorized actions, and reissue new credentials."
+  },
+  {
+    "id": "AWR-14",
+    "title": "Incident Reporting & Timely Escalation",
+    "category": "INCIDENT REPORTING",
+    "summary": "Empower users to report security anomalies promptly without fear of retribution, accelerating SOC response.",
+    "what_is_it": "Incident reporting is the established protocol for employees to notify security teams about suspicious activities, errors, or potential breaches.",
+    "why_it_matters": "The time between initial compromise and detection (dwell time) directly dictates the severity of an incident. Fast user reporting can halt an attack before data is exfiltrated.",
+    "warning_signs": [
+      "Hesitation to report accidental clicks due to fear of disciplinary action",
+      "Attempting to troubleshoot or hide compromised endpoints without alerting IT security"
+    ],
+    "safe_practices": [
+      "Familiarize yourself with your organization's designated security contact email and hotline",
+      "Report suspected incidents immediately — early notification is always rewarded",
+      "Provide clear details: exact time, what was clicked/seen, and any error messages"
+    ],
+    "what_to_do": "Use your organization's PhishAlarm / Report Incident button or call the 24/7 SOC emergency extension immediately."
+  },
+  {
+    "id": "AWR-15",
+    "title": "AI-Enabled Scams & Deepfake Defense",
+    "category": "AI SCAMS",
+    "summary": "Recognize synthetic voice cloning, video deepfakes, and automated hyper-personalized generative AI phishing campaigns.",
+    "what_is_it": "Adversaries utilize generative AI tools to craft grammatically flawless spearphishing emails, clone executive voices for phone fraud, and generate deepfake video feeds in virtual meetings.",
+    "why_it_matters": "Traditional phishing indicators like poor grammar and broken spelling are no longer reliable indicators against AI-generated attacks.",
+    "warning_signs": [
+      "Voice calls from executives sounding slightly robotic or requesting emergency financial transfers with unusual urgency",
+      "Video calls where the participant's facial lighting or lip sync appears unnatural",
+      "Highly tailored emails referencing specific recent internal meetings or vendor discussions"
+    ],
+    "safe_practices": [
+      "Establish pre-agreed verification passphrases or out-of-band protocols for urgent financial actions",
+      "Challenge unexpected requests by asking questions only the genuine person would know",
+      "Validate executive identity via a separate communication channel (e.g., Slack/Teams ping or direct call)"
+    ],
+    "what_to_do": "Pause and verify any out-of-the-ordinary urgent request before taking action, even if the voice or video resembles someone you know."
+  }
+]

@@ -1,0 +1,418 @@
+[
+  {
+    "id": "Q-01",
+    "category": "PHISHING",
+    "question": "You receive an urgent email claiming to be from your corporate IT Helpdesk stating your account will be deleted in 2 hours unless you confirm your password at 'helpdesk-update.example.net'. What is the most secure response?",
+    "options": [
+      "Click the link immediately and submit your credentials to avoid disruption",
+      "Reply directly to the email asking if the message is legitimate",
+      "Report the email using the official phishing report button and verify with IT out-of-band",
+      "Forward the email to all your coworkers to warn them"
+    ],
+    "correct_index": 2,
+    "explanation": "High-urgency language coupled with an external domain link is a hallmark phishing tactic. Always use official reporting tools and verify via trusted internal channels."
+  },
+  {
+    "id": "Q-02",
+    "category": "PHISHING",
+    "question": "When inspecting an email link, why is hovering your cursor over the hyperlink critical?",
+    "options": [
+      "It automatically scans the destination server for malware",
+      "It reveals the true underlying destination URL, which may differ from the visible display text",
+      "It encrypts your local browser session before connection",
+      "It disables any tracking cookies embedded by the sender"
+    ],
+    "correct_index": 1,
+    "explanation": "Attackers frequently display benign-looking text (e.g. 'https://company.com') while linking to an external malicious or spoofed site. Hovering reveals the actual destination."
+  },
+  {
+    "id": "Q-03",
+    "category": "PHISHING",
+    "question": "You receive a QR code in an email asking you to scan it with your personal smartphone to complete a mandatory 2FA update. What type of attack is this?",
+    "options": [
+      "Quishing (QR Code Phishing)",
+      "Vishing (Voice Phishing)",
+      "DNS Cache Poisoning",
+      "Smishing (SMS Phishing)"
+    ],
+    "correct_index": 0,
+    "explanation": "Quishing uses QR codes to redirect victims from secure corporate workstations to unmonitored mobile browsers where credential harvesting pages can bypass desktop email filters."
+  },
+  {
+    "id": "Q-04",
+    "category": "PASSWORDS",
+    "question": "Which of the following represents the strongest password practice according to modern defensive guidelines?",
+    "options": [
+      "A 6-character password changed every 14 days",
+      "A 16+ character passphrase made of 4+ random unrelated words stored in a password manager",
+      "Your company name followed by your birth year and an exclamation mark",
+      "Sharing a single complex password across your personal and work accounts"
+    ],
+    "correct_index": 1,
+    "explanation": "Length and uniqueness provide maximum entropy against modern cracking algorithms. Passphrases stored in a password manager eliminate reuse vulnerabilities."
+  },
+  {
+    "id": "Q-05",
+    "category": "PASSWORDS",
+    "question": "Why is reusing the exact same password across multiple online accounts considered a critical risk?",
+    "options": [
+      "It slows down computer processor performance",
+      "If a single third-party site suffers a breach, attackers can use credential stuffing to access all your other accounts",
+      "Password managers refuse to save duplicate passwords",
+      "It violates standard HTTP protocol specifications"
+    ],
+    "correct_index": 1,
+    "explanation": "Credential stuffing automated tools test leaked username/password combos across thousands of banking, corporate, and cloud services simultaneously."
+  },
+  {
+    "id": "Q-06",
+    "category": "PASSWORDS",
+    "question": "Where is the safest place to store complex, unique passwords for dozens of business accounts?",
+    "options": [
+      "In a plain text file on your desktop titled 'passwords.txt'",
+      "In an enterprise-approved, encrypted Password Manager protected by strong MFA",
+      "Written on a sticky note attached under your keyboard",
+      "In a shared unencrypted spreadsheet on a public cloud drive"
+    ],
+    "correct_index": 1,
+    "explanation": "Encrypted password managers utilize AES-256 or zero-knowledge architecture, ensuring credentials cannot be read without master credentials and MFA."
+  },
+  {
+    "id": "Q-07",
+    "category": "MFA",
+    "question": "You suddenly receive 15 consecutive MFA push notifications on your phone within two minutes without initiating a login. What attack are you experiencing?",
+    "options": [
+      "Buffer Overflow",
+      "MFA Fatigue (Push Spamming) Attack",
+      "Cross-Site Scripting (XSS)",
+      "SQL Injection"
+    ],
+    "correct_index": 1,
+    "explanation": "Adversaries with compromised passwords bombard the user with push prompts hoping the user will click 'Approve' out of frustration or mistake."
+  },
+  {
+    "id": "Q-08",
+    "category": "MFA",
+    "question": "Which multi-factor authentication method provides the highest resistance against Adversary-in-the-Middle (AiTM) phishing attacks?",
+    "options": [
+      "SMS text verification codes",
+      "Email verification codes",
+      "FIDO2 / WebAuthn Hardware Security Keys (or Passkeys)",
+      "Answering secret security questions"
+    ],
+    "correct_index": 2,
+    "explanation": "FIDO2/WebAuthn binds authentication cryptographically to the exact origin domain, preventing reverse-proxy phishing kits from capturing session tokens."
+  },
+  {
+    "id": "Q-09",
+    "category": "MFA",
+    "question": "A supposed colleague calls you asking for the 6-digit one-time code sent to your mobile phone so they can finish setting up your project access. What should you do?",
+    "options": [
+      "Read them the code quickly so work is not delayed",
+      "Never share one-time authentication codes with anyone, as legitimate support will never ask for them",
+      "Text them the code along with your username",
+      "Ask them to call back in 5 minutes before reading it"
+    ],
+    "correct_index": 1,
+    "explanation": "One-time passcodes are strictly confidential verification credentials. IT staff and colleagues never have legitimate technical need to know your temporary MFA token."
+  },
+  {
+    "id": "Q-10",
+    "category": "SOCIAL ENGINEERING",
+    "question": "An unknown caller claiming to be the CEO's executive assistant demands an immediate wire transfer to a new vendor, insisting standard procurement steps be skipped. What principle is the attacker exploiting?",
+    "options": [
+      "Perceived Authority, Intimidation, and Manufactured Urgency",
+      "Technical protocol vulnerabilities in TCP/IP",
+      "Hardware memory corruption",
+      "Network routing misconfiguration"
+    ],
+    "correct_index": 0,
+    "explanation": "Business Email Compromise (BEC) and executive vishing rely heavily on psychological pressure, urgency, and perceived organizational hierarchy to bypass controls."
+  },
+  {
+    "id": "Q-11",
+    "category": "SOCIAL ENGINEERING",
+    "question": "What is the cybersecurity term for an attacker attempting to follow closely behind an authorized employee through a badge-secured security door?",
+    "options": [
+      "Phreaking",
+      "Tailgating / Piggybacking",
+      "War-driving",
+      "Brute-forcing"
+    ],
+    "correct_index": 1,
+    "explanation": "Tailgating is a physical social engineering vulnerability where an unauthorized person gains physical building entry by following an authorized individual."
+  },
+  {
+    "id": "Q-12",
+    "category": "SOCIAL ENGINEERING",
+    "question": "You receive a phone call from someone claiming to be Microsoft Windows Tech Support claiming your machine has viruses and requesting remote desktop access. What is the correct action?",
+    "options": [
+      "Allow remote access immediately so they can clean your system",
+      "Provide credit card info to buy the recommended antivirus subscription",
+      "Hang up immediately; major tech vendors never initiate unsolicited cold calls about computer health",
+      "Leave the computer on and walk away"
+    ],
+    "correct_index": 2,
+    "explanation": "Unsolicited tech support calls are classic vishing scams designed to install remote access trojans (RATs) and extort payments."
+  },
+  {
+    "id": "Q-13",
+    "category": "SAFE BROWSING",
+    "question": "Your browser displays a red warning screen: 'Your connection is not private - Potential security risk ahead.' What is the safest course of action?",
+    "options": [
+      "Click advanced and proceed anyway to see the content",
+      "Do NOT proceed or submit sensitive data; inspect whether the domain or network is compromised",
+      "Disable your antivirus firewall and refresh the page",
+      "Switch to incognito mode and enter your credit card"
+    ],
+    "correct_index": 1,
+    "explanation": "SSL/TLS certificate mismatches can indicate expired certificates or an active adversary intercepting traffic on the local network."
+  },
+  {
+    "id": "Q-14",
+    "category": "SAFE BROWSING",
+    "question": "What is 'Typosquatting' (URL Hijacking)?",
+    "options": [
+      "A fast typing contest held in security conventions",
+      "Registering domain names that look almost identical to popular sites (e.g., 'examp1e.com') to catch mistyped URLs",
+      "A hardware keyboard logging device",
+      "An automated text compression technique"
+    ],
+    "correct_index": 1,
+    "explanation": "Typosquatting relies on user typographical errors to lure victims to clone sites hosting malware or credential harvesters."
+  },
+  {
+    "id": "Q-15",
+    "category": "SAFE BROWSING",
+    "question": "Why should you regularly audit and remove unused browser extensions?",
+    "options": [
+      "Extensions can consume storage and can be updated by third parties to include malicious tracking code or adware",
+      "Browser extensions permanently disable DNS lookups",
+      "Having more than two extensions causes operating systems to crash",
+      "Extensions automatically delete browsing history"
+    ],
+    "correct_index": 0,
+    "explanation": "Third-party extensions possess broad permissions to read web page DOMs, capture keystrokes, and inject scripts if their developers are bought out or compromised."
+  },
+  {
+    "id": "Q-16",
+    "category": "RANSOMWARE",
+    "question": "What is the primary objective of modern ransomware attacks?",
+    "options": [
+      "To optimize database query execution speeds",
+      "To encrypt victim files and exfiltrate confidential data to extort financial ransom under threat of loss or leak",
+      "To overclock the victim's hardware graphics card",
+      "To fix operating system registry errors"
+    ],
+    "correct_index": 1,
+    "explanation": "Modern double-extortion ransomware denies operational access via encryption and threatens public leak of exfiltrated proprietary data."
+  },
+  {
+    "id": "Q-17",
+    "category": "RANSOMWARE",
+    "question": "If you notice your computer files are rapidly being renamed to strange extensions and a ransom note appears, what is the FIRST critical step?",
+    "options": [
+      "Immediately disconnect the device from network (unplug Ethernet / disable Wi-Fi) and alert the SOC",
+      "Pay the ransom using personal funds immediately",
+      "Reboot the machine 5 times in a row",
+      "Copy the ransom note and email it to your friends"
+    ],
+    "correct_index": 0,
+    "explanation": "Network disconnection halts ransomware communication with C2 servers and prevents lateral movement/encryption across mapped network shares."
+  },
+  {
+    "id": "Q-18",
+    "category": "RANSOMWARE",
+    "question": "Which backup strategy provides the highest resilience against total ransomware destruction?",
+    "options": [
+      "Saving a duplicate copy on the same local C:\\ drive",
+      "The 3-2-1 backup rule: 3 copies of data, across 2 different media types, with at least 1 copy stored offline / air-gapped / immutable",
+      "Leaving an unencrypted USB hard drive plugged into the server 24/7",
+      "Relying solely on browser cache"
+    ],
+    "correct_index": 1,
+    "explanation": "Offline, immutable, or air-gapped backups cannot be reached or encrypted by ransomware executing inside the corporate network."
+  },
+  {
+    "id": "Q-19",
+    "category": "DATA EXPOSURE",
+    "question": "Which of the following would be classified as Personally Identifiable Information (PII)?",
+    "options": [
+      "Full Name, Social Security Number, Date of Birth, and Home Address",
+      "The official stock ticker symbol of a public company",
+      "The current temperature in London",
+      "The brand name of an enterprise router"
+    ],
+    "correct_index": 0,
+    "explanation": "PII is any data that can directly or indirectly identify, contact, or locate an individual, necessitating strict handling under privacy laws."
+  },
+  {
+    "id": "Q-20",
+    "category": "DATA EXPOSURE",
+    "question": "You need to send an internal financial report containing client bank details to an external auditor. What is the proper procedure?",
+    "options": [
+      "Attach it as a plain unencrypted Excel spreadsheet over standard email",
+      "Use an enterprise-approved encrypted file transfer solution with recipient access controls",
+      "Post it in a public online forum and send the auditor a link",
+      "Upload it to a free public document converter tool on the web"
+    ],
+    "correct_index": 1,
+    "explanation": "Confidential financial data must be encrypted in transit and at rest, using authenticated and audited enterprise channels."
+  },
+  {
+    "id": "Q-21",
+    "category": "SECURE WI-FI",
+    "question": "When working from a coffee shop or airport on public Wi-Fi, what security control should always be engaged before logging into business accounts?",
+    "options": [
+      "An enterprise Virtual Private Network (VPN)",
+      "Enabling public file and printer sharing",
+      "Disabling your local endpoint firewall",
+      "Turning off browser pop-up blockers"
+    ],
+    "correct_index": 0,
+    "explanation": "A VPN encapsulates and encrypts your network traffic through a secure tunnel, protecting it from eavesdroppers on the untrusted local Wi-Fi."
+  },
+  {
+    "id": "Q-22",
+    "category": "SECURE WI-FI",
+    "question": "What is an 'Evil Twin' Wi-Fi access point?",
+    "options": [
+      "A rogue wireless access point configured with the same SSID as a legitimate public network to snoop on connected victims",
+      "A dual-band router operating at 2.4 GHz and 5 GHz",
+      "A device with two network interface cards",
+      "A backup router that turns on during power outages"
+    ],
+    "correct_index": 0,
+    "explanation": "An Evil Twin mimics a known SSID (like 'Airport_Free_WiFi') to trick devices into connecting, allowing the attacker to intercept traffic."
+  },
+  {
+    "id": "Q-23",
+    "category": "MOBILE SECURITY",
+    "question": "A newly installed mobile calculator app requests permissions to access your Contacts, Microphone, SMS messages, and GPS location. What should you do?",
+    "options": [
+      "Grant all permissions because the developer probably needs them for math features",
+      "Deny excessive permissions and uninstall the application immediately",
+      "Leave your phone in airplane mode forever",
+      "Root / Jailbreak your device to bypass the prompt"
+    ],
+    "correct_index": 1,
+    "explanation": "Utility apps requesting intrusive permissions unrelated to core functionality often contain spyware, adware, or data scrapers."
+  },
+  {
+    "id": "Q-24",
+    "category": "MOBILE SECURITY",
+    "question": "Why does 'Jailbreaking' or 'Rooting' a mobile device pose a significant security threat to corporate data?",
+    "options": [
+      "It disables built-in operating system sandboxing, code signing, and security exploit protections",
+      "It decreases the resolution of the screen",
+      "It prevents the device from connecting to 5G cellular networks",
+      "It makes the device battery charge too fast"
+    ],
+    "correct_index": 0,
+    "explanation": "Rooting bypasses OS security boundaries, allowing any rogue app with root access to inspect memory, steal tokens, and bypass device encryption."
+  },
+  {
+    "id": "Q-25",
+    "category": "INCIDENT REPORTING",
+    "question": "You realize you accidentally entered your corporate password on a suspicious web page 10 minutes ago. What is the best immediate response?",
+    "options": [
+      "Keep quiet and hope nobody notices so you do not get in trouble",
+      "Immediately report the mistake to IT Security / SOC and reset your password on a secure machine",
+      "Wait 7 days to see if suspicious activity happens before reporting",
+      "Delete your email inbox and shutdown the computer"
+    ],
+    "correct_index": 1,
+    "explanation": "Transparent, fast reporting is vital. Immediate notification allows the SOC to revoke active session tokens and block the attacker before deeper penetration occurs."
+  },
+  {
+    "id": "Q-26",
+    "category": "INCIDENT REPORTING",
+    "question": "What is 'Dwell Time' in cybersecurity incident response?",
+    "options": [
+      "The duration an analyst takes to brew coffee",
+      "The duration an attacker remains undetected inside a victim's network before discovery",
+      "The time it takes for a hard drive to format",
+      "The time an employee spends on annual awareness training"
+    ],
+    "correct_index": 1,
+    "explanation": "Dwell time measures the elapsed time from initial unauthorized breach to detection. Reducing dwell time is a primary objective of threat intelligence and SOC monitoring."
+  },
+  {
+    "id": "Q-27",
+    "category": "SOFTWARE UPDATES",
+    "question": "Why is installing security updates ('patches') promptly critical for maintaining defensive posture?",
+    "options": [
+      "Patches repair known vulnerabilities that threat actors actively weaponize into automated exploits",
+      "Patches increase internet bandwidth speeds",
+      "Patches remove all previous files from the system",
+      "Patches change the desktop wallpaper each month"
+    ],
+    "correct_index": 0,
+    "explanation": "When vendors publish CVE patches, adversaries reverse-engineer the fixes to craft exploits targeting organizations that delay patch deployment."
+  },
+  {
+    "id": "Q-28",
+    "category": "REMOVABLE MEDIA",
+    "question": "You find a brand-new 128GB USB flash drive sitting on the sidewalk outside your office building labeled 'CONFIDENTIAL_PAYROLL_2026.xlsx'. What should you do?",
+    "options": [
+      "Plug it into your workstation to see whose payroll it is",
+      "Format it on your company laptop so you can reuse the free storage",
+      "Do NOT plug it in; hand it directly to Physical Security or the SOC as potential USB baiting",
+      "Take it home and plug it into your personal gaming PC"
+    ],
+    "correct_index": 2,
+    "explanation": "USB baiting drops weaponized drives configured with BadUSB microcontrollers that execute automated keystroke injection payloads when connected."
+  },
+  {
+    "id": "Q-29",
+    "category": "AI SCAMS",
+    "question": "An employee receives a voice call from someone who sounds identical to their direct supervisor asking for an emergency wire transfer to an unknown vendor. How should the employee handle this?",
+    "options": [
+      "Execute the transfer immediately since the voice sounded familiar",
+      "Validate the request through established secondary communication channels or pre-arranged authorization protocols before executing any transaction",
+      "Ignore company wire policies because executive requests always override procedures",
+      "Post about the call on public social media"
+    ],
+    "correct_index": 1,
+    "explanation": "Generative AI voice cloning tools can replicate an individual's vocal timbre from short public audio clips. Dual-control out-of-band verification prevents deepfake fraud."
+  },
+  {
+    "id": "Q-30",
+    "category": "PASSWORDS",
+    "question": "What is the primary risk of using personal information (e.g. pet names, high school name, children's birth years) in passwords?",
+    "options": [
+      "These details are often publicly discoverable through social media reconnaissance (OSINT) and easily cracked via dictionary attacks",
+      "They cause keyboard keys to wear out faster",
+      "They are blocked by the international Unicode consortium",
+      "They automatically disable firewall rules"
+    ],
+    "correct_index": 0,
+    "explanation": "OSINT reconnaissance allows attackers to build custom wordlists targeting specific victims with personal biographical data."
+  },
+  {
+    "id": "Q-31",
+    "category": "SAFE BROWSING",
+    "question": "What is a 'Drive-By Download'?",
+    "options": [
+      "Downloading files while driving a motor vehicle",
+      "An unintended download of malicious software that occurs automatically without the user's explicit consent simply by visiting a compromised webpage",
+      "Downloading software over a satellite link",
+      "A fast file transfer protocol used in SOCs"
+    ],
+    "correct_index": 1,
+    "explanation": "Drive-by downloads leverage browser or plugin vulnerabilities to install malicious payloads silently in the background when visiting a compromised site."
+  },
+  {
+    "id": "Q-32",
+    "category": "MFA",
+    "question": "Why is SMS-based verification generally considered less secure than hardware security keys or authenticator apps?",
+    "options": [
+      "SMS text messages are vulnerable to SIM swapping, SS7 signaling interception, and network eavesdropping",
+      "SMS requires an active Wi-Fi connection at all times",
+      "SMS messages cannot display numbers greater than 999",
+      "SMS is incompatible with modern smartphones"
+    ],
+    "correct_index": 0,
+    "explanation": "Adversaries can bribe or trick mobile carriers into transferring a victim's phone number to an attacker-controlled SIM card (SIM swapping), capturing all incoming SMS 2FA codes."
+  }
+]

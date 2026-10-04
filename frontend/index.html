@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity Awareness & Threat Intelligence Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- App Header & Navigation -->
+  <header class="app-header">
+    <div class="brand-container">
+      <span class="brand-logo">🛡️ CyberDefend CTI</span>
+      <span class="brand-badge">SOC & Awareness Platform</span>
+    </div>
+    <nav class="main-nav">
+      <button class="active" data-tab="tab-dashboard">📊 SOC Overview</button>
+      <button data-tab="tab-threats">📡 Threat Feed</button>
+      <button data-tab="tab-search">🔍 IOC Lookup</button>
+      <button data-tab="tab-alerts">🚨 Alert Queue</button>
+      <button data-tab="tab-mitre">🎯 MITRE ATT&CK</button>
+      <button data-tab="tab-vulns">🩹 Vulnerabilities</button>
+      <button data-tab="tab-awareness">🎓 Awareness Center</button>
+      <button data-tab="tab-quiz">✍️ Security Quiz</button>
+      <button data-tab="tab-executive">👔 Executive Summary</button>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- 1. SOC Overview Tab -->
+    <section id="tab-dashboard" class="tab-pane active">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Security Operations & Threat Intelligence Overview</h1>
+          <p class="section-subtitle">Real-time normalized defensive telemetry, threat trends, and risk distributions.</p>
+        </div>
+        <span class="badge badge-low">⚡ DEFENSIVE MODE (OFFLINE SANITIZED DATA)</span>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title">Total Threat Records</div>
+          <div class="kpi-value" id="kpi-total-threats">--</div>
+          <div class="kpi-sub">Synthetic normalized items</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Critical Threats</div>
+          <div class="kpi-value" id="kpi-critical-threats" style="color:var(--accent-red);">--</div>
+          <div class="kpi-sub">Immediate attention tier</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">High Threats</div>
+          <div class="kpi-value" id="kpi-high-threats" style="color:var(--accent-amber);">--</div>
+          <div class="kpi-sub">Elevated risk tier</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Active IOCs</div>
+          <div class="kpi-value" id="kpi-active-iocs" style="color:var(--accent-cyan);">--</div>
+          <div class="kpi-sub">Under active monitoring</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Open Alert Triage</div>
+          <div class="kpi-value" id="kpi-open-alerts" style="color:var(--accent-blue);">--</div>
+          <div class="kpi-sub">Pending SOC review</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Avg. Risk Score</div>
+          <div class="kpi-value" id="kpi-avg-risk">--</div>
+          <div class="kpi-sub">Composite 0-100 metric</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Avg. Evidence Conf.</div>
+          <div class="kpi-value" id="kpi-avg-confidence">--</div>
+          <div class="kpi-sub">Source confidence</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">CVEs Tracked</div>
+          <div class="kpi-value" id="kpi-vulns">--</div>
+          <div class="kpi-sub">Contextual patch priority</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Org Awareness Score</div>
+          <div class="kpi-value" id="kpi-awareness-score" style="color:var(--accent-green);">--</div>
+          <div class="kpi-sub">User training hygiene</div>
+        </div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header">Threat Severity Distribution</div>
+          <div class="chart-container"><canvas id="chart-severity"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">Threat Categories (Top Vectors)</div>
+          <div class="chart-container"><canvas id="chart-category"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">Indicator Type Distribution</div>
+          <div class="chart-container"><canvas id="chart-indicators"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">Top MITRE ATT&CK Tactics</div>
+          <div class="chart-container"><canvas id="chart-tactics"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">Risk Score Distribution (0-100 Tiers)</div>
+          <div class="chart-container"><canvas id="chart-risk-dist"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">Threat Status Distribution</div>
+          <div class="chart-container"><canvas id="chart-status"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Threat Feed Tab -->
+    <section id="tab-threats" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Normalized Threat Intelligence Feed</h1>
+          <p class="section-subtitle">2,200+ safe synthetic indicators validated and enriched with defensive context.</p>
+        </div>
+      </div>
+
+      <!-- Filters Bar -->
+      <div class="filter-bar">
+        <input type="text" id="filter-search" class="filter-input" placeholder="Search indicator, threat ID, keyword..." style="min-width:240px;">
+        <select id="filter-category" class="filter-select">
+          <option value="">All Categories</option>
+          <option value="PHISHING">Phishing</option>
+          <option value="MALWARE">Malware</option>
+          <option value="RANSOMWARE">Ransomware</option>
+          <option value="CREDENTIAL THREATS">Credential Threats</option>
+          <option value="WEB THREATS">Web Threats</option>
+          <option value="NETWORK THREATS">Network Threats</option>
+          <option value="VULNERABILITY EXPOSURE">Vulnerability Exposure</option>
+          <option value="SOCIAL ENGINEERING">Social Engineering</option>
+          <option value="DATA EXPOSURE">Data Exposure</option>
+          <option value="ACCOUNT SECURITY">Account Security</option>
+        </select>
+        <select id="filter-severity" class="filter-select">
+          <option value="">All Severities</option>
+          <option value="CRITICAL">Critical</option>
+          <option value="HIGH">High</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="LOW">Low</option>
+          <option value="INFORMATIONAL">Informational</option>
+        </select>
+        <select id="filter-indtype" class="filter-select">
+          <option value="">All Indicator Types</option>
+          <option value="IP ADDRESS">IP Address</option>
+          <option value="DOMAIN">Domain</option>
+          <option value="URL">URL</option>
+          <option value="FILE HASH">File Hash</option>
+          <option value="EMAIL/SENDER DOMAIN">Email Sender</option>
+          <option value="CVE ID">CVE ID</option>
+        </select>
+        <select id="filter-status" class="filter-select">
+          <option value="">All Statuses</option>
+          <option value="NEW">New</option>
+          <option value="UNDER_REVIEW">Under Review</option>
+          <option value="MONITORING">Monitoring</option>
+          <option value="CLOSED">Closed</option>
+          <option value="FALSE_POSITIVE">False Positive</option>
+        </select>
+        <select id="filter-sort" class="filter-select">
+          <option value="newest">Sort: Newest First</option>
+          <option value="highest_risk">Sort: Highest Risk</option>
+          <option value="highest_confidence">Sort: Highest Confidence</option>
+          <option value="most_observed">Sort: Most Observed</option>
+        </select>
+        <button class="btn-primary" onclick="applyThreatFilters()">Filter</button>
+        <button class="btn-page" onclick="resetThreatFilters()">Reset</button>
+      </div>
+
+      <!-- Threat Table -->
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Threat ID</th>
+              <th>Threat Name</th>
+              <th>Category</th>
+              <th>Indicator</th>
+              <th>Severity</th>
+              <th>Risk</th>
+              <th>Conf.</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="threats-table-body">
+            <tr><td colspan="9" style="text-align:center; padding:2rem;">Loading threat intelligence records...</td></tr>
+          </tbody>
+        </table>
+        <div class="pagination-container">
+          <span id="pagination-info">Page 1 of 1</span>
+          <div class="pagination-buttons">
+            <button id="btn-prev-page" class="btn-page" onclick="changeThreatPage(-1)">Previous</button>
+            <button id="btn-next-page" class="btn-page" onclick="changeThreatPage(1)">Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. IOC Search & Enrichment Tab -->
+    <section id="tab-search" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Defensive Indicator (IOC) Lookup & Enrichment</h1>
+          <p class="section-subtitle">Syntactic format verification, local threat database correlation, and defensive playbook mapping.</p>
+        </div>
+      </div>
+
+      <div class="kpi-card" style="margin-bottom:1.5rem;">
+        <h3 style="font-size:1.1rem; margin-bottom:0.5rem; color:var(--accent-cyan);">Search or Validate Any Indicator</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+          Supported Formats: IPv4, IPv6, Domain, URL, MD5/SHA-1/SHA-256 Hash, CVE-ID.<br>
+          <i>Note: Performs purely local database and syntax lookup. Does not connect to or probe external endpoints.</i>
+        </p>
+        <div style="display:flex; gap:0.75rem; max-width:800px;">
+          <input type="text" id="ioc-search-input" class="filter-input" placeholder="e.g., 198.51.100.25, login-verify.example.org, CVE-2026-1001, hash..." style="flex:1;">
+          <button id="btn-ioc-search" class="btn-primary">Enrich Indicator</button>
+        </div>
+      </div>
+
+      <div id="ioc-search-result" class="kpi-card" style="display:none; padding:1.5rem;"></div>
+    </section>
+
+    <!-- 4. Alert Management Queue -->
+    <section id="tab-alerts" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">SOC Alert Queue & Fatigue Reduction</h1>
+          <p class="section-subtitle">Correlated high-risk alerts with aggregated sighting counts to prevent notification fatigue.</p>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Alert ID</th>
+              <th>Threat Context</th>
+              <th>Indicator</th>
+              <th>Severity</th>
+              <th>Risk</th>
+              <th>Sightings</th>
+              <th>Status Transition</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="alerts-table-body">
+            <tr><td colspan="8" style="text-align:center; padding:2rem;">Loading alert queue...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. MITRE ATT&CK Tab -->
+    <section id="tab-mitre" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Adversary Tactics & Techniques (MITRE ATT&CK Matrix)</h1>
+          <p class="section-subtitle">Defensive mapping of threat behaviors to standardized ATT&CK enterprise tactics.</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title" style="color:var(--accent-cyan);">TA0001: Initial Access</div>
+          <p style="font-size:0.85rem; margin:0.4rem 0;">Spearphishing Link, Valid Accounts, Exploit Public Application</p>
+          <div style="font-size:0.75rem; color:var(--text-muted);">Defensive focus: MFA, Email hygiene, WAF</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title" style="color:var(--accent-cyan);">TA0002: Execution</div>
+          <p style="font-size:0.85rem; margin:0.4rem 0;">User Execution, Command and Scripting Interpreter</p>
+          <div style="font-size:0.75rem; color:var(--text-muted);">Defensive focus: Application allowlisting, EDR</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title" style="color:var(--accent-cyan);">TA0006: Credential Access</div>
+          <p style="font-size:0.85rem; margin:0.4rem 0;">Brute Force, OS Credential Dumping, Phishing for Credentials</p>
+          <div style="font-size:0.75rem; color:var(--text-muted);">Defensive focus: Passkeys, Credential Guard</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title" style="color:var(--accent-cyan);">TA0011: Command & Control</div>
+          <p style="font-size:0.85rem; margin:0.4rem 0;">Application Layer Protocol, Non-Standard Ports</p>
+          <div style="font-size:0.75rem; color:var(--text-muted);">Defensive focus: DNS Sinkholing, TLS Inspection</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title" style="color:var(--accent-cyan);">TA0040: Impact</div>
+          <p style="font-size:0.85rem; margin:0.4rem 0;">Data Encrypted for Impact, Service Stop</p>
+          <div style="font-size:0.75rem; color:var(--text-muted);">Defensive focus: Immutable Backups, IR Playbooks</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Vulnerabilities Tab -->
+    <section id="tab-vulns" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Vulnerability Awareness & Contextual Prioritizer</h1>
+          <p class="section-subtitle">Risk-based patching model combining CVSS, EPSS probability, CISA KEV exploitation, and asset exposure.</p>
+        </div>
+      </div>
+
+      <!-- Interactive Calculator -->
+      <div class="kpi-card" style="margin-bottom:1.5rem;">
+        <h3 style="font-size:1.1rem; color:var(--accent-cyan); margin-bottom:0.5rem;">Interactive Contextual Patch Prioritizer</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+          Demonstrates why <b>CVSS Score alone does not dictate remediation urgency</b>. Contextual factors like active in-the-wild exploitation and internet exposure determine true operational priority.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; align-items:flex-end;">
+          <div>
+            <label style="font-size:0.8rem; color:var(--text-muted);">Base CVSS (0.0 - 10.0)</label>
+            <input type="number" id="calc-cvss" class="filter-input" value="7.5" step="0.1" min="0" max="10" style="width:100%;">
+          </div>
+          <div>
+            <label style="font-size:0.8rem; color:var(--text-muted);">EPSS Probability (0.0 - 1.0)</label>
+            <input type="number" id="calc-epss" class="filter-input" value="0.35" step="0.01" min="0" max="1" style="width:100%;">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.3rem;">
+            <label style="font-size:0.8rem; display:flex; align-items:center; gap:0.4rem;">
+              <input type="checkbox" id="calc-internet" checked> Internet-Facing Asset
+            </label>
+            <label style="font-size:0.8rem; display:flex; align-items:center; gap:0.4rem;">
+              <input type="checkbox" id="calc-critical-asset" checked> Mission-Critical Asset
+            </label>
+            <label style="font-size:0.8rem; display:flex; align-items:center; gap:0.4rem;">
+              <input type="checkbox" id="calc-kev" checked> Known Exploited (CISA KEV)
+            </label>
+          </div>
+          <div>
+            <button id="btn-calc-priority" class="btn-primary" style="width:100%;">Compute Priority</button>
+          </div>
+        </div>
+
+        <div id="calc-result-box" style="display:none; background:var(--bg-card); padding:1rem; border-radius:0.5rem; margin-top:1rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.85rem; color:var(--text-muted);">Contextual Priority Score:</span>
+              <b id="calc-priority-score" style="font-size:1.4rem; color:var(--accent-amber); margin-left:0.5rem;">--</b>
+            </div>
+            <div>
+              <span class="badge badge-high" id="calc-priority-tier">--</span>
+            </div>
+          </div>
+          <p style="font-size:0.85rem; margin-top:0.4rem;"><b>Recommended Remediation SLA:</b> <span id="calc-sla">--</span></p>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;" id="calc-rationale">--</p>
+        </div>
+      </div>
+
+      <!-- Vulnerabilities Table -->
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>CVE ID</th>
+              <th>Product / Asset</th>
+              <th>Severity</th>
+              <th>CVSS</th>
+              <th>EPSS</th>
+              <th>KEV Status</th>
+              <th>Priority Score</th>
+              <th>Remediation SLA Guidance</th>
+            </tr>
+          </thead>
+          <tbody id="vuln-table-body">
+            <tr><td colspan="8" style="text-align:center; padding:2rem;">Loading vulnerabilities...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7. Awareness Center Tab -->
+    <section id="tab-awareness" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Cybersecurity Awareness & Human Defense Center</h1>
+          <p class="section-subtitle">15 core micro-learning modules empowering users and analysts with proactive security habits.</p>
+        </div>
+      </div>
+      <div id="awareness-modules-grid" class="awareness-grid"></div>
+    </section>
+
+    <!-- 8. Security Quiz Tab -->
+    <section id="tab-quiz" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Interactive Cybersecurity Knowledge Assessment</h1>
+          <p class="section-subtitle">32 scenario-based defensive questions with instant scoring, category breakdown, and personalized recommendations.</p>
+        </div>
+      </div>
+
+      <div class="quiz-container">
+        <!-- Active Quiz Box -->
+        <div id="quiz-active-box">
+          <div class="quiz-progress-bar">
+            <div id="quiz-progress-fill" class="quiz-progress-fill"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <span id="quiz-counter" style="font-size:0.85rem; color:var(--text-muted);">Question 1 of 32</span>
+            <span id="quiz-category-badge" class="badge badge-info">PHISHING</span>
+          </div>
+          <div class="quiz-question-box">
+            <h3 id="quiz-question-text" style="font-size:1.15rem; line-height:1.4;">Loading question...</h3>
+            <div id="quiz-options-container" class="quiz-options"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:1.5rem;">
+            <button id="btn-quiz-prev" class="btn-page" onclick="prevQuizQuestion()">Previous</button>
+            <button id="btn-quiz-next" class="btn-primary" onclick="nextQuizQuestion()">Next Question</button>
+          </div>
+        </div>
+
+        <!-- Quiz Result Box -->
+        <div id="quiz-result-box" style="display:none;">
+          <div style="text-align:center; padding:1.5rem 0; border-bottom:1px solid var(--border-color);">
+            <span style="font-size:0.9rem; color:var(--text-muted);">Overall Awareness Score</span>
+            <div id="quiz-score-display" style="font-size:3rem; font-weight:800; color:var(--accent-green); margin:0.3rem 0;">0%</div>
+            <div id="quiz-tier-display" style="font-size:1.2rem; font-weight:700; color:var(--text-main);">--</div>
+            <p id="quiz-summary-display" style="font-size:0.9rem; color:var(--text-muted); margin-top:0.4rem;">--</p>
+          </div>
+
+          <div style="margin-top:1.5rem;">
+            <h4 style="color:var(--accent-cyan); margin-bottom:0.75rem;">Category Performance Breakdown</h4>
+            <div id="quiz-category-breakdown"></div>
+          </div>
+
+          <div style="margin-top:1.5rem; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); padding:1rem; border-radius:0.5rem;">
+            <h4 style="color:var(--accent-amber); margin-bottom:0.5rem;">Personalized Learning Recommendations</h4>
+            <ul id="quiz-recommendations-list" style="margin-left:1.25rem; font-size:0.875rem;"></ul>
+          </div>
+
+          <div style="text-align:center; margin-top:1.5rem;">
+            <button class="btn-primary" onclick="loadQuiz()">Retake Assessment</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Executive Summary Tab -->
+    <section id="tab-executive" class="tab-pane">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">Executive Cybersecurity & Risk Posture Summary</h1>
+          <p class="section-subtitle">High-level briefing for organizational leadership, bridging technical threat telemetry with strategic decisions.</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title">High & Critical Exposure</div>
+          <div class="kpi-value" id="exec-high-crit-count" style="color:var(--accent-red);">--</div>
+          <div class="kpi-sub">Priority threat items</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Human Defense Health</div>
+          <div class="kpi-value" id="exec-awareness-rating" style="font-size:1.3rem; color:var(--accent-green);">--</div>
+          <div class="kpi-sub">Training completion status</div>
+        </div>
+      </div>
+
+      <div class="kpi-card" style="margin-bottom:1.5rem;">
+        <h3 style="font-size:1.1rem; color:var(--accent-cyan); margin-bottom:0.5rem;">Threat Landscape Assessment</h3>
+        <p id="exec-summary-text" style="font-size:0.95rem; color:var(--text-main);">Loading executive assessment...</p>
+      </div>
+
+      <div class="kpi-card">
+        <h3 style="font-size:1.1rem; color:var(--accent-amber); margin-bottom:0.75rem;">Strategic Defensive Priorities</h3>
+        <ul id="exec-recommendations" style="margin-left:1.5rem; font-size:0.9rem; line-height:1.6;"></ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Threat Detail Modal -->
+  <div id="threat-detail-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2 id="modal-threat-name" style="font-size:1.25rem; color:var(--text-main);">Threat Details</h2>
+          <span id="modal-threat-id" style="font-size:0.8rem; color:var(--text-muted); font-family:var(--font-mono);"></span>
+        </div>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:0.75rem; margin-bottom:1rem;">
+        <div class="kpi-card" style="padding:0.75rem;">
+          <div class="kpi-title">Severity</div>
+          <div id="modal-severity">--</div>
+        </div>
+        <div class="kpi-card" style="padding:0.75rem;">
+          <div class="kpi-title">Risk Score</div>
+          <div id="modal-risk" style="font-size:1.2rem; font-weight:700;">--</div>
+        </div>
+        <div class="kpi-card" style="padding:0.75rem;">
+          <div class="kpi-title">Confidence</div>
+          <div id="modal-confidence" style="font-size:1.2rem; font-weight:700;">--</div>
+        </div>
+        <div class="kpi-card" style="padding:0.75rem;">
+          <div class="kpi-title">Category</div>
+          <div id="modal-category" style="font-size:0.9rem; font-weight:600;">--</div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-card); padding:1rem; border-radius:0.5rem; margin-bottom:1rem;">
+        <div style="font-size:0.85rem; color:var(--text-muted);" id="modal-dates"></div>
+        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;"><b>Intelligence Source:</b> <span id="modal-source"></span></div>
+        <div style="font-size:0.9rem; margin-top:0.5rem;" id="modal-desc"></div>
+      </div>
+
+      <div style="background:var(--bg-card); padding:1rem; border-radius:0.5rem; margin-bottom:1rem;">
+        <h4 style="color:var(--accent-cyan); font-size:0.95rem; margin-bottom:0.4rem;">MITRE ATT&CK Behavioral Mapping</h4>
+        <div id="modal-mitre" style="font-size:0.85rem;"></div>
+      </div>
+
+      <div style="background:var(--bg-card); padding:1rem; border-radius:0.5rem; margin-bottom:1rem;">
+        <h4 style="color:var(--accent-blue); font-size:0.95rem; margin-bottom:0.4rem;">Correlated Indicators & Campaigns</h4>
+        <div id="modal-related" style="font-size:0.85rem;"></div>
+      </div>
+
+      <div style="background:var(--bg-card); padding:1rem; border-radius:0.5rem; margin-bottom:1rem;">
+        <h4 style="color:var(--accent-green); font-size:0.95rem; margin-bottom:0.4rem;">Recommended Defensive Playbook</h4>
+        <ul id="modal-playbook" style="margin-left:1.25rem; font-size:0.85rem;"></ul>
+      </div>
+
+      <!-- Analyst Investigation Notes -->
+      <div style="background:var(--bg-card); padding:1rem; border-radius:0.5rem;">
+        <h4 style="color:var(--accent-purple); font-size:0.95rem; margin-bottom:0.5rem;">Analyst Triage & Investigation Notes</h4>
+        <div id="modal-notes-list" style="margin-bottom:0.75rem;"></div>
+        <div style="display:flex; gap:0.5rem;">
+          <input type="text" id="input-new-note" class="filter-input" placeholder="Add investigation finding or triage comment..." style="flex:1;">
+          <button id="btn-add-note" class="btn-primary">Add Note</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <p>
+      🛡️ <b>Cybersecurity Awareness & Threat Intelligence Dashboard</b> — Course Project & Defensive Portfolio.<br>
+      <i>Ethical Notice: Strictly designed for defensive cybersecurity analysis and education. Uses synthetic/sanitized indicators (RFC 5737/3849). Does not attack or communicate with external systems.</i>
+    </p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
